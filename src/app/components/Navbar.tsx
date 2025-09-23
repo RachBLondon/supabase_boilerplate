@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { logout } from "../(auth)/logout/actions"
 // import { MobileMenuButton } from "./navbar.client"
 
 export function Navbar({ user }: { user: { name?: string } | null }) {
@@ -12,7 +13,7 @@ export function Navbar({ user }: { user: { name?: string } | null }) {
             <Link href="/practice">Practice</Link>
             <Link href="/progress">Progress</Link>
             <Link href="/materials">Materials</Link>
-            <form action="/api/auth/signout" method="post">
+            <form action={logout}>
               <button type="submit">Log out</button>
             </form>
           </>
