@@ -2,6 +2,7 @@
 import "./globals.css"
 import Navbar from "./components/Navbar"
 import { createClient } from "./utils/server"
+import { Toaster } from "sonner"
 
 // Reading cookies() or headers() already makes this segment dynamic.
 // If you prefer, you can be explicit:
@@ -17,6 +18,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Pass only what you need (never raw tokens) */}
         <Navbar user={user ? { name: user.email } : null} />
         {children}
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   )
