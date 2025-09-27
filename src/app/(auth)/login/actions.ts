@@ -18,7 +18,8 @@ export async function login(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(data)
 
   if (error) {
-    redirect('/error')
+    console.log('Login error 🥳:', error.message, error.status)
+  return { success: false, error: error.message }
   }
 
   revalidatePath('/', 'layout')
@@ -38,8 +39,8 @@ export async function signup(formData: FormData) {
   const { data: signupData, error } = await supabase.auth.signUp(data)
 
   if (error) {
-    console.log('Supabase error details:', error.message, error.status)
-    redirect('/error')
+    console.log('Signup error:', error.message, error.status)
+    return { success: false, error: error.message }
   }
 
   revalidatePath('/', 'layout')
@@ -60,7 +61,7 @@ export async function requestPasswordReset(formData: FormData) {
   })
 
   if (error) {
-    console.log('Password reset error:', error.message)
+    console.log('Password reset request error:', error.message, error.status)
     redirect('/error?message=reset-failed')
   }
 
